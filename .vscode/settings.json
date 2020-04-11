@@ -1,0 +1,11 @@
+{
+    "python.pythonPath": "/home/gille/facebook/fb/bin/python",
+    "python.autoComplete.extraPaths": [
+        "/home/gille/facebook/fb/lib/python3.6"
+    ],
+    "python.jediEnabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length=120",
+        "--ignore=E402,F841,F401,E302,E305",
+    ],
+}
