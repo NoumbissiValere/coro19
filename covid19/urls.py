@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.conf.urls import url, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,3 +25,5 @@ urlpatterns = [
     path('api/on-covid-19/xml', views.get_xml, name='get_xml'),
     path('api/on-covid-19/logs', views.get_logs, name='get_logs')
 ]
+
+urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
