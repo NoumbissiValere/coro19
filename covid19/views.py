@@ -27,14 +27,14 @@ def get_xml(request):
 
 @api_view(['GET'])
 def get_logs(request):
-    output = []
+    output = ""
     for obj in Silk.objects.all():
         method = obj.request.method
         path = obj.request.path
         status_code = obj.status_code
         time_taken = round(obj.request.time_taken)
-        output.append("{0}        {1}        {2}        {3} ms".format(method,
-                                                                       path,
-                                                                       status_code,
-                                                                       time_taken))
-    return Response("\n".join(output), status.HTTP_200_OK, content_type='text/plain')
+        output += "{0}\t\t{1}\t\t{2}\t\t{3} ms\n".format(method,
+                                                         path,
+                                                         status_code,
+                                                         time_taken)
+    return Response(output, status.HTTP_200_OK, content_type='text/plain')
