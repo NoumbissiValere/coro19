@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from silk.models import Response as Silk
 from silk.profiling.profiler import silk_profile
 from rest_framework import status
@@ -37,4 +38,4 @@ def get_logs(request):
                                                          path,
                                                          status_code,
                                                          time_taken)
-    return Response(output, status.HTTP_200_OK, content_type='text/html')
+    return HttpResponse(output, status=status.HTTP_200_OK, content_type='text/plain')
