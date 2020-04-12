@@ -20,10 +20,10 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', views.get_json, name='get_json'),
-    path('/json', views.get_json, name='get_json'),
-    path('/xml', views.get_xml, name='get_xml'),
-    path('/logs', views.get_logs, name='get_logs')
+    url(r'^$', views.get_json, name='get_json'),
+    url(r'^json$', views.get_json, name='get_json'),
+    url(r'^xml$', views.get_xml, name='get_xml'),
+    url(r'^logs$', views.get_logs, name='get_logs'),
 
 ]
 
