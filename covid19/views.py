@@ -1,4 +1,5 @@
 from silk.models import Response as Silk
+from silk.profiling.profiler import silk_profile
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
@@ -10,6 +11,7 @@ from .estimator import estimator
 # Create your views here.
 @api_view(['POST'])
 @renderer_classes([JSONRenderer])
+@silk_profile(name="get_json")
 def get_json(request):
     output = estimator(request.data)
     return Response(output, status=status.HTTP_200_OK, content_type='application/json')
@@ -17,6 +19,7 @@ def get_json(request):
 
 @api_view(['POST'])
 @renderer_classes([XMLRenderer])
+@silk_profile(name="get_xml")
 def get_xml(request):
     output = estimator(request.data)
     return Response(output, status=status.HTTP_200_OK, content_type='application/xml')
