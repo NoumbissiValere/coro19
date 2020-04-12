@@ -29,9 +29,16 @@ def get_xml(request):
 @api_view(['GET'])
 def get_logs(request):
     output = ""
+    valid_path = ['/api/v1/on-covid-19',
+                  '/api/v1/on-covid-19/',
+                  '/api/v1/on-covid-19/json',
+                  '/api/v1/on-covid-19/xml',
+                  '/api/v1/on-covid-19/logs']
     for obj in Silk.objects.all():
         method = obj.request.method
         path = obj.request.path
+        if path not in valid_path:
+            continue
         status_code = obj.status_code
         time_taken = round(obj.request.time_taken)
         output += "{0}\t\t{1}\t\t{2}\t\t{3} ms\n".format(method,
