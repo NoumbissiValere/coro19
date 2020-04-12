@@ -37,4 +37,4 @@ def get_logs(request):
                                                          path,
                                                          status_code,
                                                          time_taken)
-    return Response(output, status.HTTP_200_OK, content_type='text/plain')
+    return Response(output, status.HTTP_200_OK, content_type='text/html')
