@@ -53,10 +53,21 @@ def get_xml(request):
 
 @api_view(['GET'])
 def get_logs(request):
+    t1 = time.time()
     output = ""
     for obj in ResponseTime.objects.all():
         output += "{}\t\t{}\t\t{}\t\t{:02d}ms\n".format(obj.method,
                                                         obj.path,
                                                         obj.status_code,
                                                         obj.time_taken)
-    return HttpResponse(output, status=status.HTTP_200_OK, content_type='text/plain')
+    resp = HttpResponse(output, status=status.HTTP_200_OK,
+                        content_type='text/plain')
+    path = request.path
+    method = request.method
+    status_code = resp.status_code
+    time_taken = round((time.time() - t1) * 1000)
+    ResponseTime.objects.create(method=method,
+                                path=path,
+                                status_code=status_code,
+                                time_taken=time_taken)
+    return resp
